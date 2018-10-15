@@ -1,7 +1,8 @@
 ## AndroidAPI28 BottomNavigationView+ViewPager+Fragment
 
 >参考文章[使用谷歌官方BottomNavigationView实现非md风格的底部状态栏](https://www.jianshu.com/p/24278f3259b3),[基于android P(9.0)版本的BottomNavigationView使用教程(去除动画效果，水波纹效果)](https://blog.csdn.net/qq_33915851/article/details/80867986)
->BottomNavigationView在API28中相对以前版本有友好改动，有取消动画等接口，不用像以前使用反射
+
+**BottomNavigationView在API28中相对以前版本有友好改动，有取消动画等接口，不用像以前使用反射**
 #### BottomNavigationView
 - **组成：View+menu**
 
