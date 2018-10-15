@@ -16,11 +16,13 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/mAppBottomBnv"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
+        app:itemIconSize="30dp"
+        app:itemTextAppearanceActive="@style/bottom_tab_title_active"
+        app:itemTextAppearanceInactive="@style/bottom_tab_title_inactive"
         android:background="@android:color/white"
-        app:itemIconTint="@drawable/app_tab_color"
-        app:itemTextColor="@drawable/app_tab_color"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation" />
 
 </android.support.constraint.ConstraintLayout>

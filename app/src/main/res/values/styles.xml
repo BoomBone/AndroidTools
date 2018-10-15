@@ -7,5 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="bottom_tab_title_active">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#D81B60</item>
+    </style>
+    <style name="bottom_tab_title_inactive">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#e6e6e6</item>
+    </style>
 
 </resources>
