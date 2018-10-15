@@ -16,8 +16,10 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/mAppBottomBnv"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:itemIconSize="30dp"
+        android:layout_height="48dp"
+        app:itemIconSize="24dp"
+        app:itemBackground="@null"
+        app:itemHorizontalTranslationEnabled="false"
         app:itemTextAppearanceActive="@style/bottom_tab_title_active"
         app:itemTextAppearanceInactive="@style/bottom_tab_title_inactive"
         android:background="@android:color/white"
