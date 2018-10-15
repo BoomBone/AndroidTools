@@ -3,8 +3,10 @@ package com.tools.androidtools.ui.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.view.MenuItem
 import com.tools.androidtools.R
 import com.tools.androidtools.ui.adapter.ViewPagerAdapter
 import com.tools.androidtools.ui.fragment.TabOneFragment
@@ -28,7 +30,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
-        mAppBottomBnv.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        mAppBottomBnv.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.app_navigation_tab_one -> {
+                    mAppVp.currentItem = 0
+                }
+                R.id.app_navigation_contact -> {
+                    mAppVp.currentItem = 1
+                }
+                R.id.app_navigation_find -> {
+                    mAppVp.currentItem = 2
+                }
+                R.id.app_navigation_mine -> {
+                    mAppVp.currentItem = 3
+                }
+            }
+            false
+        }
         mAppVp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {
 
@@ -51,28 +69,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         mAppBottomBnv.itemIconTintList = null
-    }
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.app_navigation_tab_one -> {
-                mAppVp.currentItem = 0
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.app_navigation_contact -> {
-                mAppVp.currentItem = 1
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.app_navigation_find -> {
-                mAppVp.currentItem = 2
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.app_navigation_mine -> {
-                mAppVp.currentItem = 3
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
     }
 
 }
