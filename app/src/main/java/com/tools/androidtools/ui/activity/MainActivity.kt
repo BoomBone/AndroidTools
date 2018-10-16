@@ -9,14 +9,13 @@ import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import com.tools.androidtools.R
 import com.tools.androidtools.ui.adapter.ViewPagerAdapter
-import com.tools.androidtools.ui.fragment.TabOneFragment
-import com.tools.androidtools.ui.fragment.TabTwoFragment
+import com.tools.androidtools.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     val fragmentList =
-            arrayListOf<Fragment>(TabOneFragment(), TabTwoFragment(), TabOneFragment(), TabTwoFragment())
+            arrayListOf<Fragment>(OneFragment(), TwoFragment(), ThreeFragment(), FourFragment())
 
     val mViewPagerAdapter = ViewPagerAdapter(fragmentList, supportFragmentManager)
 
