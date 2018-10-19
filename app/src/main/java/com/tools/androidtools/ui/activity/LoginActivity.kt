@@ -9,11 +9,14 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 
 import com.tools.androidtools.R
 import com.tools.androidtools.data.request.LoginRequestBean
 import com.tools.androidtools.data.response.Deserializer
 import com.tools.androidtools.data.response.LoginResponseBean
+import com.tools.androidtools.data.response.fromJson
+import com.tools.androidtools.utils.preference.PreferenceSettings
 
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.toast
@@ -74,6 +77,11 @@ class LoginActivity : AppCompatActivity() {
                     result.fold({ d ->
                         if (d.status == 200) {
                             toast("登录或注册成功")
+                            Log.e("mian", "data=${d.data}")
+                            val bean = Gson().fromJson<LoginResponseBean>(d.data)
+                            val userId = bean.id
+                            Log.e("main", "userId=$userId")
+                            PreferenceSettings.userId = userId
                             finish()
                         } else {
                             toast("登录或注册失败")
