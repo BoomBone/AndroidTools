@@ -38,4 +38,7 @@ dependencies {
 
     implementation "com.github.kittinunf.fuel:fuel-android:$fuel_version"
     implementation "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
+
+    // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
+    implementation 'com.github.qingmei2:rximagepicker:2.2.0'
 }
