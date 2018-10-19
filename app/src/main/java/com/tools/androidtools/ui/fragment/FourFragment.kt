@@ -1,6 +1,7 @@
 package com.tools.androidtools.ui.fragment
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,12 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.DataPart
 import com.google.gson.Gson
 import com.qingmei2.rximagepicker.core.RxImagePicker
 
 import com.tools.androidtools.R
+import com.tools.androidtools.common.AppContext
 import com.tools.androidtools.data.request.UploadImageRequestBean
 import com.tools.androidtools.data.response.Deserializer
+import com.tools.androidtools.data.response.LoginResponseBean
+import com.tools.androidtools.data.response.fromJson
 import com.tools.androidtools.ui.activity.LoginActivity
 import com.tools.androidtools.utils.imagepicker.MyImagePicker
 import com.tools.androidtools.utils.preference.PreferenceSettings
@@ -21,6 +26,7 @@ import com.tools.androidtools.utils.uriToPath
 import kotlinx.android.synthetic.main.fragment_four.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.io.File
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,7 +61,8 @@ class FourFragment : Fragment() {
                         .openGallery(context!!)
                         .subscribe {
                             val uri = it.uri
-                            val path = uriToPath(uri, context!!)
+//                            val path = uriToPath(uri, context!!)
+                            uploadImage(userId, uri)
                         }
             }
         }
@@ -63,26 +70,22 @@ class FourFragment : Fragment() {
 
     }
 
-    private fun uploadImage(base64: String?) {
-        val userId = "1810169T0PDW25AW"
-        val requestBean = UploadImageRequestBean(userId, base64)
-        val requestJson = Gson().toJson(requestBean)
-
-        val type = mutableMapOf<String, String>()
-        type["Content-Type"] = "application/json"
-
-        Log.e("fuel", "requestData=$requestJson")
-
-        Fuel.post("http://192.168.0.132:8080/u/uploadFaceBase64")
-                .body(requestJson)
-                .header(type)
+    private fun uploadImage(userId: String, uri: Uri) {
+        val formatData = listOf("userId" to userId)
+        Fuel.upload("http://192.168.0.132:8080/u/uploadFaceBase64", parameters = formatData)
+                .dataParts { request, url ->
+                    listOf<DataPart>(DataPart(File(uriToPath(uri, context!!)), "file", "image/*"))
+                }
                 .responseObject(Deserializer()) { request, response, result ->
                     result.fold({ d ->
                         if (d.status == 200) {
+                            AppContext.toast("头像上传成功")
                             Log.e("main", "data=${d.data}")
-                            context!!.toast("头像上传成功")
+                            val bean = Gson().fromJson<LoginResponseBean>(d.data)
+                            val picUrl = bean.faceImage
+                            Log.e("main", "data=$picUrl")
                         } else {
-                            context!!.toast("头像上传失败")
+                            AppContext.toast("登录或注册失败")
                         }
                     }, { err ->
                         Log.e("fuel", "err=$err")
