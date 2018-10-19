@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -41,4 +43,8 @@ dependencies {
 
     // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
     implementation 'com.github.qingmei2:rximagepicker:2.2.0'
+
+    //Glide
+    api 'com.github.bumptech.glide:glide:4.7.1'
+    kapt 'com.github.bumptech.glide:compiler:4.7.1'
 }
